@@ -2,10 +2,13 @@ package com.socialmedia.apisspringboot.Model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Table( name = "Users")
 public class User {
 
     @Id
@@ -15,8 +18,8 @@ public class User {
     private String email;
     private String password;
     private String gender;
-    private List<Integer> followers;
-    private List<Integer> followings;
+    private List<Integer> followers = new ArrayList<>();
+    private List<Integer> followings = new ArrayList<>();
 
     public User() {
     }
