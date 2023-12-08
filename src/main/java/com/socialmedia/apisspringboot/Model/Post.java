@@ -1,5 +1,6 @@
 package com.socialmedia.apisspringboot.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -21,9 +22,9 @@ public class Post {
     private String video;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
     private User user;
 
+    @OneToMany
     private List<User> liked = new ArrayList<>();
 
     private LocalDateTime createdAt;
