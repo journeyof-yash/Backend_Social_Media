@@ -13,14 +13,6 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @PostMapping("/register")
-    public User createUser(@RequestBody User user){
-
-        User savedUser = userService.registerUser(user);
-
-        return savedUser;
-    }
-
     @PutMapping("/api/updateUser/{userId}")
     public User updateUser(@RequestBody User user, @PathVariable Integer userId) throws Exception{
 
