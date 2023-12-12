@@ -13,10 +13,12 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @PutMapping("/api/updateUser/{userId}")
-    public User updateUser(@RequestBody User user, @PathVariable Integer userId) throws Exception{
+    @PutMapping("/api/updateUser")
+    public User updateUser(@RequestHeader("Authorization")String jwt) throws Exception{
 
-        User updatedUser = userService.updateUser(user,userId);
+        User user = userService.findUserByJwt(jwt);
+
+        User updatedUser = userService.updateUser(user,user.getId());
 
         return updatedUser;
     }
@@ -38,7 +40,7 @@ public class UserController {
     }
 
     @PutMapping("/api/users/{userId1}/{userId2}")
-    public User updateUser(@PathVariable Integer userId1, @PathVariable Integer userId2) throws Exception{
+    public User followUser(@PathVariable Integer userId1, @PathVariable Integer userId2) throws Exception{
 
         User user = userService.followUser(userId1,userId2);
 
@@ -51,5 +53,13 @@ public class UserController {
         List<User> users = userService.searchUser(query);
 
         return users;
+    }
+
+    @GetMapping("/api/users/profile")
+    public User getUserFromToken(@RequestHeader("Authorization")String jwt){
+
+        User user = userService.findUserByJwt(jwt);
+        user.setPassword(null);
+        return user;
     }
 }

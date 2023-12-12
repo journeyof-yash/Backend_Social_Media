@@ -1,5 +1,6 @@
 package com.socialmedia.apisspringboot.Service;
 
+import com.socialmedia.apisspringboot.Config.JwtProvider;
 import com.socialmedia.apisspringboot.Model.User;
 import com.socialmedia.apisspringboot.Respository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -92,5 +93,15 @@ public class UserServiceImplementation implements UserService{
     public List<User> searchUser(String query) {
 
         return userRepository.searchUser(query);
+    }
+
+    @Override
+    public User findUserByJwt(String jwt) {
+
+        String email = JwtProvider.getEmailFromJwtToken(jwt);
+
+        User user = userRepository.findByEmail(email);
+
+        return user;
     }
 }

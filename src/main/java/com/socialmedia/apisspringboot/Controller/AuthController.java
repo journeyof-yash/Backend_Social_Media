@@ -67,12 +67,14 @@ public class AuthController {
 
         String token = JwtProvider.generateToken(authentication);
 
+        System.out.println(token);
+
         AuthResponse res = new AuthResponse(token, "Login Success");
 
         return res;
     }
 
-    private Authentication authenticate(String email, String password) {
+    public Authentication authenticate(String email, String password) {
 
         UserDetails userDetails = customerUserDetailsService.loadUserByUsername(email);
 
