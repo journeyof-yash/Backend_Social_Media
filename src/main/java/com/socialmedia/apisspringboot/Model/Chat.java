@@ -23,15 +23,19 @@ public class Chat {
 
     private LocalDateTime timeStamp;
 
+    @OneToMany(mappedBy = "chat")
+    private List<Message> messages = new ArrayList<>();
+
     public Chat() {
     }
 
-    public Chat(Integer id, String chat_name, String chat_image, List<User> users, LocalDateTime timeStamp) {
+    public Chat(Integer id, String chat_name, String chat_image, List<User> users, LocalDateTime timeStamp, List<Message> messages) {
         this.id = id;
         this.chat_name = chat_name;
         this.chat_image = chat_image;
         this.users = users;
         this.timeStamp = timeStamp;
+        this.messages = messages;
     }
 
     public Integer getId() {
@@ -72,5 +76,13 @@ public class Chat {
 
     public void setTimeStamp(LocalDateTime timeStamp) {
         this.timeStamp = timeStamp;
+    }
+
+    public List<Message> getMessages() {
+        return messages;
+    }
+
+    public void setMessages(List<Message> messages) {
+        this.messages = messages;
     }
 }
