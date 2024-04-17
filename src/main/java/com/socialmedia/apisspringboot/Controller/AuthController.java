@@ -78,7 +78,7 @@ public class AuthController {
 
         UserDetails userDetails = customerUserDetailsService.loadUserByUsername(email);
 
-        if(userDetails != null){
+        if(userDetails == null){
             throw new BadCredentialsException("invalid username");
         }
         if(!passwordEncoder.matches(password, userDetails.getPassword())){
